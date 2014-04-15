@@ -180,6 +180,29 @@ This part is hard there will be mistakes.
      visits list <timestamp>,
      PRIMARY KEY(page)
     );
+~~
+### Append Item to list
+
+    update alist set visits=visits+['2014-04-14 19:34:20-0500'] where page='/fake' ;
+
+~~
+          Update.Assignments updateAssignments = QueryBuilder.update(keyspaceName, table).with();
+          for (PersistentProperty prop : persistentEntity.getPersistentProperties()){
+          updateAssignments = updateAssignments.and(QueryBuilder.set(prop.getName(), convertToCassandraType(entry.get(prop.getName()))));
+          }
+
+          Statement update = updateAssignments.where(QueryBuilder.eq("id", UUID.fromString(uuid.toString())));
+
+          session.execute(update);
+
+~~
+
+          ByteBuffer bb = row.getBytes(columnName);
+          byte[] result = new byte[bb.remaining()];
+          bb.get(result);
+          ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(result);
+          ObjectInputStream ois = new ObjectInputStream(byteArrayInputStream);
+          o = ois.readObject();    
 
 ~~~~
 ## Local Cassandra Meetup
